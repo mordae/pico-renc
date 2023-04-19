@@ -39,6 +39,11 @@
 # define RENC_DISCARD_MS 5
 #endif
 
+/* Enable pull up on rotary encoder pins. */
+#if !defined(RENC_PULL_UP)
+# define RENC_PULL_UP 1
+#endif
+
 
 struct state {
 	uint8_t cw_pin, ccw_pin, sw_pin, sens;
@@ -280,15 +285,27 @@ void renc_config(unsigned num, uint8_t cw_pin, uint8_t ccw_pin, uint8_t sw_pin, 
 
 	gpio_init(cw_pin);
 	gpio_set_dir(cw_pin, false);
+#if RENC_PULL_UP
 	gpio_pull_up(cw_pin);
+#else
+	gpio_disable_pulls(cw_pin);
+#endif
 
 	gpio_init(ccw_pin);
 	gpio_set_dir(ccw_pin, false);
+#if RENC_PULL_UP
 	gpio_pull_up(ccw_pin);
+#else
+	gpio_disable_pulls(ccw_pin);
+#endif
 
 	gpio_init(sw_pin);
 	gpio_set_dir(sw_pin, false);
+#if RENC_PULL_UP
 	gpio_pull_up(sw_pin);
+#else
+	gpio_disable_pulls(sw_pin);
+#endif
 
 	gpio_add_raw_irq_handler(sw_pin, irq_handler_sw);
 	gpio_add_raw_irq_handler_masked((1 << cw_pin) | (1 << ccw_pin), irq_handler_re);

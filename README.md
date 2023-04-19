@@ -31,6 +31,9 @@ Your header file may include the original board file, but it must define followi
 
 /* Under how many milliseconds discard completely. */
 #define RENC_DISCARD_MS 5
+
+/* Enable pull up on rotary encoder pins. */
+#define RENC_PULL_UP 1
 ```
 
 See `include/renc.h` for interface.
