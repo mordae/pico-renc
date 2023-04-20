@@ -16,6 +16,7 @@
 
 #include "renc.h"
 
+#include <stdio.h>
 #include <stdint.h>
 
 
@@ -317,6 +318,9 @@ void renc_config(unsigned num, uint8_t cw_pin, uint8_t ccw_pin, uint8_t sw_pin, 
 	gpio_set_irq_enabled(sw_pin, event_mask, true);
 	gpio_set_irq_enabled(cw_pin, event_mask, true);
 	gpio_set_irq_enabled(ccw_pin, event_mask, true);
+
+	printf("renc: Configured: num=%i, sw=%i, cw=%i, ccw=%i, sens=%i\n",
+		num, sw_pin, cw_pin, ccw_pin, sens);
 }
 
 
