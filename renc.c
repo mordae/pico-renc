@@ -278,6 +278,9 @@ void renc_init(void)
 
 void renc_config(unsigned num, uint8_t cw_pin, uint8_t ccw_pin, uint8_t sw_pin, uint8_t sens)
 {
+	assert (state[num].cw_pin == state[num].ccw_pin);
+	assert (state[num].cw_pin == 0);
+
 	state[num].cw_pin = cw_pin;
 	state[num].ccw_pin = ccw_pin;
 	state[num].sw_pin = sw_pin;
