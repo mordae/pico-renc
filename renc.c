@@ -68,7 +68,7 @@ static queue_t queue;
  * Alarm handler for `irq_handler_sw`.
  * See below for more information.
  */
-static int64_t __no_inline_not_in_flash_func(debounce)(alarm_id_t id, void *arg)
+static int64_t __no_inline_not_in_flash_func(debounce)(alarm_id_t, void *arg)
 {
 	struct state *st = arg;
 
@@ -185,7 +185,7 @@ __isr static void __no_inline_not_in_flash_func(irq_handler_re)(void)
 		unsigned ccw = !gpio_get(st->ccw_pin);
 
 		/* Shift in new encoder state. */
-		uint8_t state0 = (st->state << 2) & 0b111100 | (ccw << 1) | cw;
+		uint8_t state0 = ((st->state << 2) & 0b111100) | (ccw << 1) | cw;
 
 		/*
 		 * Only some transitions are valid. Namely those where new
